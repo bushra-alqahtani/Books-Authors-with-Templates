@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <div class="container mx-auto mt-5">
+
+        <h1> {{book.title}} </h1>
+        <h2>id: <span>{{book.id}}</span></h2>
+        <h2>description:</h2>
+        <p>{{book.desc}}</p>
+    </div>
+
+
+<!--second section -->
+    <div class="container">
+        <div class="mt-5">
+            <h4>Authors</h4>
+            <ul>
+                {% for a in book.authers.all %}
+                <li>{{a.first_name}} {{a.last_name}}</li>
+                {% endfor %}
+            </ul>
+
+            <!--select  -->
+            <form action="/bookToAuthor/{{book.id}}" method="post" class="row mt-5">
+                {% csrf_token %}
+                <select name="author" id="" class="col-3 ms-4 me-5">
+                    <option value="0" selected>select an author</option>
+                    
+                    {% for a in author %}
+                    <option value="{{a.id}}"> {{a.first_name}} {{a.last_name}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btun col-1">Add</button>
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+</body>
+
+</html>

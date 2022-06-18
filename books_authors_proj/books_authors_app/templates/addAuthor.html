@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <div class="container">
+
+        <form method="post" action="/addauther">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">first name</label>
+                <input type="text" name="first_name" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">last name</label>
+                <input type="text" name="last_name" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">note</label>
+                <textarea name="notes" id="input" class="form-control" rows="3" required="required"></textarea>
+            </div>
+                {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+<!--bottom side-->
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in authors %}
+                <tr>
+                    <th scope="row">{{a.id}}</th>
+                    <td>{{a.first_name}} {{a.last_name}}</td>
+                    <td><a href="{% url 'adetail' a.id %}">view</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
